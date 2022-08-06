@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.LogicalTree;
 using System.Diagnostics;
 
 namespace MvvmRouting.Avalonia;
@@ -9,22 +10,22 @@ namespace MvvmRouting.Avalonia;
 /// </summary>
 public class ActivatableUserControl : UserControl
 {
-    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    protected override void OnAttachedToLogicalTree(LogicalTreeAttachmentEventArgs e)
     {
-        Debug.WriteLine($"{nameof(ActivatableUserControl)}: Attached to visual tree; activating DataContext and setting up OnPropertyChanged...");
+        Debug.WriteLine($"{nameof(ActivatableUserControl)}: Attached to logical tree; activating DataContext and setting up OnPropertyChanged...");
         PropertyChanged += OnDataContextChanged;
         ActivateDataContext(DataContext);
 
-        base.OnAttachedToVisualTree(e);
+        base.OnAttachedToLogicalTree(e);
     }
 
-    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    protected override void OnDetachedFromLogicalTree(LogicalTreeAttachmentEventArgs e)
     {
-        Debug.WriteLine($"{nameof(ActivatableUserControl)}: Detached from visual tree; deactivating DataContext...");
+        Debug.WriteLine($"{nameof(ActivatableUserControl)}: Detached from logical tree; deactivating DataContext...");
         PropertyChanged -= OnDataContextChanged;
         DeactivateDataContext(DataContext);
 
-        base.OnDetachedFromVisualTree(e);
+        base.OnDetachedFromLogicalTree(e);
     }
 
     private void OnDataContextChanged(object? sender, AvaloniaPropertyChangedEventArgs e)

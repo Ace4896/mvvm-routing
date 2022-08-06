@@ -1,6 +1,8 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Platform;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace MvvmRouting.Avalonia;
@@ -10,6 +12,12 @@ namespace MvvmRouting.Avalonia;
 /// </summary>
 public class ActivatableWindow : Window
 {
+    public ActivatableWindow() : base()
+    { }
+
+    public ActivatableWindow(IWindowImpl windowImpl) : base(windowImpl)
+    { }
+
     protected override void OnOpened(EventArgs e)
     {
         Debug.WriteLine($"{nameof(ActivatableWindow)}: Window opened; activating DataContext and setting up OnPropertyChanged...");
@@ -19,13 +27,13 @@ public class ActivatableWindow : Window
         base.OnOpened(e);
     }
 
-    protected override void OnClosed(EventArgs e)
+    protected override void OnClosing(CancelEventArgs e)
     {
         Debug.WriteLine($"{nameof(ActivatableWindow)}: Window closed; deactivating DataContext...");
         PropertyChanged -= OnDataContextChanged;
         DeactivateDataContext(DataContext);
 
-        base.OnClosed(e);
+        base.OnClosing(e);
     }
 
     private void OnDataContextChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
