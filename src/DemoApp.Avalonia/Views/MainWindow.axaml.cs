@@ -1,8 +1,8 @@
-using Avalonia.Controls;
+using MvvmRouting.Avalonia;
 
 namespace DemoApp.Avalonia.Views;
 
-public partial class MainWindow : Window
+public partial class MainWindow : ActivatableWindow
 {
     public MainWindow()
     {

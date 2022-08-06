@@ -4,6 +4,9 @@
     <Nullable>enable</Nullable>
     <WarningsAsErrors>nullable</WarningsAsErrors>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.10.17" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MvvmRouting\MvvmRouting.csproj" />

@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace DemoApp.ViewModels;
 
-public class ListPageViewModel : PageViewModelBase
+public class ListPageViewModel : PageViewModelBase, IActivatableViewModel
 {
-    private ITextPageFactory _textPageFactory;
+    private readonly ITextPageFactory _textPageFactory;
 
     public List<string> Items { get; }
 
@@ -26,6 +26,8 @@ public class ListPageViewModel : PageViewModelBase
     {
         _textPageFactory = textPageFactory;
 
+        Activator = new(this);
+
         GoToTextPage = new RelayCommand(() => Navigate(_textPageFactory.Get(HostViewModel, "Title", "Navigated from List Page!")));
 
         if (dataAccess == null)
@@ -42,4 +44,19 @@ public class ListPageViewModel : PageViewModelBase
             Items = dataAccess.GetData();
         }
     }
+
+    #region IActivatableViewModel
+
+    public Activator Activator { get; }
+
+    public void OnActivation()
+    {
+        // Extend the list with more data
+        Items.Add("Here's another item that was added by IActivatableViewModel.Activate!");
+    }
+
+    public void OnDeactivation()
+    { }
+
+    #endregion
 }
