@@ -12,5 +12,15 @@
     <vm:MainWindowViewModel />
   </Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  <DockPanel>
+    <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center"
+                Orientation="Horizontal">
+      <Button Content="Go to Text Page (via IHostViewModel)"
+              Command="{Binding GoToTextPage}" />
+      <Button Content="Go to List Page (via IHostViewModel)"
+              Command="{Binding GoToListPage}" />
+    </StackPanel>
+    
+    <TransitioningContentControl Content="{Binding Router.CurrentViewModel}" />
+  </DockPanel>
 </Window>

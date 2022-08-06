@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:DemoApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="DemoApp.Avalonia.Views.TextPageView"
+             x:CompileBindings="True" x:DataType="vm:TextPageViewModel">
+  <Design.DataContext>
+    <vm:TextPageViewModel />
+  </Design.DataContext>
+
+  <DockPanel>
+    <Button DockPanel.Dock="Top" HorizontalAlignment="Center"
+            Content="Go to List Page (via IPageViewModel)"
+            Command="{Binding GoToListPage}" />
+    <StackPanel HorizontalAlignment="Center"
+                Margin="8" Spacing="8">
+      <TextBlock FontSize="16" FontWeight="SemiBold"
+                 TextAlignment="Center"
+                 Text="{Binding Title}" />
+      <TextBlock TextAlignment="Center"
+                 Text="{Binding Description}" />
+    </StackPanel>
+  </DockPanel>
+</UserControl>

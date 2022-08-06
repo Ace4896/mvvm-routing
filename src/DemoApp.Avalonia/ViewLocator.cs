@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
+using DemoApp.Avalonia.Views;
 using DemoApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,12 @@ namespace DemoApp.Avalonia;
 
 public class ViewLocator : IDataTemplate
 {
+    // Here, we'd register the corresponding ViewModel <-> View mappings
     private static readonly Dictionary<Type, Func<IControl>> _viewModelMappings = new()
-    { };
+    {
+        { typeof(ListPageViewModel), () => new ListPageView() },
+        { typeof(TextPageViewModel), () => new TextPageView() },
+    };
 
     public IControl Build(object data)
     {
